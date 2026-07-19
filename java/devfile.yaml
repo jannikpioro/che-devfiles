@@ -1,0 +1,27 @@
+schemaVersion: 2.2.2
+metadata:
+  name: java-nonroot
+attributes:
+  pod-overrides:
+    spec:
+      imagePullSecrets:
+        - name: workspace-registry-pull
+components:
+  - name: tools
+    attributes:
+      container-overrides:
+        securityContext:
+          runAsNonRoot: true
+          runAsUser: 10001
+          runAsGroup: 0
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+              - ALL
+    container:
+      image: ghcr.io/jannikpioro/cloud-task/java-workspace:1.0.0
+      sourceMapping: /projects
+      memoryRequest: 512Mi
+      memoryLimit: 2Gi
+      cpuRequest: 250m
+      mountSources: true

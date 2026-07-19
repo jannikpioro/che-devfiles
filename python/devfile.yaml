@@ -1,0 +1,27 @@
+schemaVersion: 2.2.2
+metadata:
+  name: python-nonroot
+attributes:
+  pod-overrides:
+    spec:
+      imagePullSecrets:
+        - name: workspace-registry-pull
+components:
+  - name: tools
+    attributes:
+      container-overrides:
+        securityContext:
+          runAsNonRoot: true
+          runAsUser: 10001
+          runAsGroup: 0
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+              - ALL
+    container:
+      image: ghcr.io/jannikpioro/cloud-task/python-workspace:1.0.0
+      sourceMapping: /projects
+      memoryRequest: 256Mi
+      memoryLimit: 1Gi
+      cpuRequest: 100m
+      mountSources: true
