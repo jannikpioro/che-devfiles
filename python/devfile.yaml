@@ -20,6 +20,10 @@ components:
               - ALL
     container:
       image: ghcr.io/jannikpioro/cloud-task/python-workspace:1.0.0
+      command:
+        - sleep
+      args:
+        - infinity
       sourceMapping: /projects
       memoryRequest: 256Mi
       memoryLimit: 1Gi
